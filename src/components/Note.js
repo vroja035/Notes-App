@@ -1,14 +1,22 @@
-import { MdDeleteForever, MdModeEdit } from 'react-icons/md';
+import { MdDeleteForever, MdModeEdit, MdMoreHoriz, } from 'react-icons/md';
 import { useState } from 'react';
 
 const Note = ({id, text, date, handleDeleteNote, handleEditNote}) => {
 
+    //handlers for editing and popup menu
     const [isEditing, setIsEditing] = useState(false);
     const [editedText, setEditedText] = useState(text);
     const characterLimit = 250;
 
+    const [menuStatus, setMenuStatus] = useState(false);
+
+    const toggleMenu = () => {
+        setMenuStatus(!menuStatus);
+      };
+
     const handleEditClick = () =>{
         setIsEditing(true);
+        setMenuStatus(false);
     };
 
     const handleSaveClick = () =>{
@@ -43,32 +51,50 @@ const Note = ({id, text, date, handleDeleteNote, handleEditNote}) => {
 
             )}
 
-            <div className='note-footer'>
-
-                <small>{date}</small>
+            <div className='note-footer'>               
 
                 {isEditing ? (
                     <>
-                    <small>{characterLimit - editedText.length} Remaining</small>
+                    <small><b>{characterLimit - editedText.length} Remaining</b></small>
 
                     <button className='save' onClick={handleSaveClick}>
-                        Save
+                        <b>Save</b>
                      </button>
                     </>
 
                 ) : (
                 <>
-                    <MdDeleteForever 
-                        onClick = {() => handleDeleteNote(id)} 
-                        className = 'delete-icon' 
-                        size='1.3em' 
-                    />
+                    <small><b>{date}</b></small>
 
-                    <MdModeEdit
-                        onClick = {handleEditClick}
-                        className = 'delete-icon' 
-                        size='1.3em' 
-                    />
+                    <div className='menu-container'>
+
+                        <MdMoreHoriz
+                            onClick={toggleMenu}
+                            className='menu-icon'
+                            size='1.3em'
+                        />
+
+                        {menuStatus && (
+                            <div className='menu-popup'>
+
+                                <MdModeEdit
+                                    onClick = {handleEditClick}
+                                    className = 'edit-icon' 
+                                    size='1.3em' 
+                                />
+
+                                <MdDeleteForever 
+                                    onClick = {() => handleDeleteNote(id)} 
+                                    className = 'delete-icon' 
+                                    size='1.3em' 
+                                />
+                            </div>
+                        )}
+
+
+                    </div>
+
+                    
                 </>
                 )}      
 

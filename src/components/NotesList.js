@@ -1,6 +1,7 @@
 import Note from './Note';
 import AddNote from './AddNote';
 
+//returns the list of notes
 const NotesList = ({ notes, handleAddNote, handleDeleteNote, handleEditNote }) => {
     return(
         <div className='notes-list'>

@@ -1,5 +1,6 @@
 import React from 'react';
 
+//header with dark/mode button and title
 const Header = ({handleToggleDarkMode}) => {
     return(
         <div className='header'>

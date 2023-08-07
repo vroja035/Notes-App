@@ -13,6 +13,7 @@ const App = () => {
 
   const [darkMode, setDarkMode] = useState(false);
 
+  //gets the saved notes
   useEffect(() => {
     
     const savedNotes = JSON.parse(localStorage.getItem('notes-app-data'));
@@ -28,6 +29,7 @@ const App = () => {
 
   }, []);
 
+  //saves the current notes and dark/light mode choice
   useEffect(() => {
     localStorage.setItem('notes-app-data', JSON.stringify(notes));
   }, [notes]);
@@ -36,12 +38,14 @@ const App = () => {
     localStorage.setItem('notes-app-dark-mode', JSON.stringify(darkMode));
   }, [darkMode]);
 
+
+  //add, delete, and edit note functions
   const addNote = (text) => {
     const date = new Date();
     const newNote = {
       id: nanoid(),
       text: text,
-      date: date.toLocaleDateString(),
+      date: date.toLocaleDateString([], {month:'2-digit', day:'2-digit', year:'numeric'}) + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
     }
     const newNotes = [...notes, newNote];
     setNotes(newNotes);
