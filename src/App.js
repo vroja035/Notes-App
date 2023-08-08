@@ -39,7 +39,7 @@ const App = () => {
   }, [darkMode]);
 
 
-  //add, delete, and edit note functions
+  //add, delete, pin, and edit note functions
   const addNote = (text) => {
     const date = new Date();
     const newNote = {
@@ -65,6 +65,13 @@ const App = () => {
     setNotes(updatedNotes);
   };
 
+  const pinNote = (id) => {
+    const updatedNotes = notes.map((note) =>
+      note.id === id ? { ...note, isPinned: !note.isPinned } : note
+    );
+    setNotes(updatedNotes);
+  };
+
 
   return ( 
     <div className={`${darkMode && 'dark-mode'}`}>
@@ -79,6 +86,7 @@ const App = () => {
           handleAddNote={addNote}
           handleDeleteNote={deleteNote}
           handleEditNote={editNote}
+          handlePinNote={pinNote}
         />
 
       </div>

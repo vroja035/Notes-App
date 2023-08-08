@@ -98,13 +98,24 @@ textarea:focus {
 	cursor: pointer;
 }
 
-.edit-icon {
+.edit-icon, .pin-icon {
 	cursor: pointer;
 	position:relative;
 	bottom: 5px;
 }
 
-.delete-icon:hover, .edit-icon:hover {
+.pin-icon{
+	bottom:10px;
+}
+
+.pin-icon2{
+	position:relative;
+	bottom: -1px;
+	right: 10px;
+
+}
+
+.delete-icon:hover, .edit-icon:hover, .pin-icon:hover {
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;

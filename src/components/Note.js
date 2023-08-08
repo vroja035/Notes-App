@@ -1,7 +1,7 @@
-import { MdDeleteForever, MdModeEdit, MdMoreHoriz, } from 'react-icons/md';
+import { MdDeleteForever, MdModeEdit, MdMoreHoriz, MdPushPin, } from 'react-icons/md';
 import { useState } from 'react';
 
-const Note = ({id, text, date, handleDeleteNote, handleEditNote}) => {
+const Note = ({id, text, date, isPinned, handleDeleteNote, handleEditNote, handlePinNote}) => {
 
     //handlers for editing and popup menu
     const [isEditing, setIsEditing] = useState(false);
@@ -31,6 +31,11 @@ const Note = ({id, text, date, handleDeleteNote, handleEditNote}) => {
             setEditedText(event.target.value);
         }      
     };
+
+    const handlePinClick = () =>{
+        handlePinNote(id);
+        setMenuStatus(false);   
+    }
 
 
     return( 
@@ -64,8 +69,16 @@ const Note = ({id, text, date, handleDeleteNote, handleEditNote}) => {
 
                 ) : (
                 <>
-                    <small><b>{date}</b></small>
+                   {isPinned ? (
 
+                    <><MdPushPin className='pin-icon2' size='1em'/><small><i>{date}</i></small></>    
+
+                   ):(
+
+                    <small><i>{date}</i></small>   
+
+                   )}              
+    
                     <div className='menu-container'>
 
                         <MdMoreHoriz
@@ -77,6 +90,11 @@ const Note = ({id, text, date, handleDeleteNote, handleEditNote}) => {
                         {menuStatus && (
                             <div className='menu-popup'>
 
+                                <MdPushPin
+                                    onClick={handlePinClick}
+                                    className='pin-icon'
+                                    size='1.3em'
+                                />
                                 <MdModeEdit
                                     onClick = {handleEditClick}
                                     className = 'edit-icon' 
