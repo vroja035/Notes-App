@@ -72,13 +72,18 @@ const App = () => {
     setNotes(updatedNotes);
   };
 
+  const deleteAllNotes = () => {
+    setNotes([]);
+  };
+
 
   return ( 
     <div className={`${darkMode && 'dark-mode'}`}>
 
       <div className='container'>
 
-        <Header handleToggleDarkMode={setDarkMode}/>
+        <Header handleToggleDarkMode={setDarkMode}
+                handleDeleteAllNotes={deleteAllNotes}/>
         <Search handleSearchNote = {setSearchText}/>
 
         <NotesList 

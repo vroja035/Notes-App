@@ -1,8 +1,9 @@
 import Note from './Note';
 import AddNote from './AddNote';
+import Header from './Header';
 
 //returns the list of notes
-const NotesList = ({ notes, handleAddNote, handleDeleteNote, handleEditNote, handlePinNote }) => {
+const NotesList = ({ notes, handleAddNote, handleDeleteNote, handleEditNote, handlePinNote, }) => {
     
     const pinnedNotes = notes.filter((note) => note.isPinned);
     const unpinnedNotes = notes.filter((note) => !note.isPinned);
